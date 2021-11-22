@@ -1,0 +1,25 @@
+{
+  "development": {
+    "username": "jgo",
+    "password": "jgo",
+    "database": "gymdb",
+    "host": "3.70.17.4",
+    "port": 3306,
+    "dialect": "mysql",
+    "JWT_KEY": "jwtjgokey"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
