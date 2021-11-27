@@ -16,23 +16,27 @@ module.exports = {
         const response = { ...baseModels.baseResponseModel }
         const errorResponse = { ...baseModels.baseErrorResponseModel };
         const userId = req.query.user_id;
+        const token = req.query.token;
+
+        if ((userId || token) == null) {
+            print('I WAS HER EDOGSON XD');
+            return baseModels.logError(errorResponse, response, 400, "Missing parameters", res);
+        }
+
+        const plan = await PlanModel.findOne({ where: { user_id: userId } });
+
+        if (plan != null) {
+
+            response.success = true;
+            response.data = new Serializer(PlanModel, JSONScheme).serialize(plan);
+            return res.status(200).json(response)
 
 
-        verifyToken(req, res, async () => {
-            const plan = await PlanModel.findOne({ where: { user_id: userId } });
+        } else {
+            print('I WAS HER EDOGSON XD');
+            return baseModels.logError(errorResponse, response, 404, "Plan was not found", res);
+        }
 
-            if (plan != null) {
-
-                response.success = true;
-                response.data = new Serializer(PlanModel, JSONScheme).serialize(plan);
-                return res.status(200).json(response)
-
-
-            } else {
-                print('I WAS HER EDOGSON XD');
-                return baseModels.logError(errorResponse, response, 404, "Plan was not found", res);
-            }
-        });
 
 
     },
