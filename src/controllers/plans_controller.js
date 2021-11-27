@@ -23,7 +23,7 @@ module.exports = {
             return baseModels.logError(errorResponse, response, 400, "Missing parameters", res);
         }
 
-        verifyToken(req, res, async () => {
+        verifyToken(req, res, errorResponse, response, async () => {
             const plan = await PlanModel.findOne({ where: { user_id: userId } });
 
             if (plan != null) {

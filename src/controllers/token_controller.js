@@ -3,7 +3,7 @@ const baseModels = require('../../models/base_response_model');
 
 const config = process.env;
 
-const verifyToken = (req, res, next) => {
+const verifyToken = (req, res, errorResponse, response, next) => {
     const token =
         req.body.token || req.query.token || req.headers["x-access-token"];
 
