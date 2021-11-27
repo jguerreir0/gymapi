@@ -18,7 +18,7 @@ module.exports = {
         const userId = req.query.user_id;
 
 
-        verifyToken(req, res, () => {
+        verifyToken(req, res, async () => {
             const plan = await PlanModel.findOne({ where: { user_id: userId } });
 
             if (plan != null) {
