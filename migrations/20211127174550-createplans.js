@@ -35,6 +35,21 @@ module.exports = {
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
     });
+
+    await queryInterface.createTable('plans', {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      url: {
+        type: Sequelize.TEXT
+      },
+      user_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'users', key: 'id' }
+      },
+    });
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -46,6 +61,7 @@ module.exports = {
      */
 
     await queryInterface.dropTable('users');
+    await queryInterface.dropTable('plans');
 
   }
 };

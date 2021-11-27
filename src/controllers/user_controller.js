@@ -9,13 +9,6 @@ const JSONScheme = {
     exclude: ['createdAt', 'updatedAt', 'password'],
 };
 
-function logError(errorResponse, response, errorCode, errorMessage, res) {
-    errorResponse.code = errorCode;
-    errorResponse.message = errorMessage;
-    response.error = errorResponse;
-    return res.status(errorCode).json(response);
-}
-
 
 module.exports = {
 
