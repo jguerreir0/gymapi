@@ -19,7 +19,7 @@ module.exports = {
         const token = req.query.token;
 
         if ((userId || token) == null) {
-            print('I WAS HER EDOGSON XD');
+
             return baseModels.logError(errorResponse, response, 400, "Missing parameters", res);
         }
 
@@ -33,7 +33,7 @@ module.exports = {
 
 
         } else {
-            print('I WAS HER EDOGSON XD');
+
             return baseModels.logError(errorResponse, response, 404, "Plan was not found", res);
         }
 
