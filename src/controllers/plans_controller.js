@@ -29,6 +29,7 @@ module.exports = {
 
 
             } else {
+                print('I WAS HER EDOGSON XD');
                 return baseModels.logError(errorResponse, response, 404, "Plan was not found", res);
             }
         });
