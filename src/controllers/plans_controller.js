@@ -16,26 +16,28 @@ module.exports = {
         const response = { ...baseModels.baseResponseModel }
         const errorResponse = { ...baseModels.baseErrorResponseModel };
         const userId = req.query.user_id;
-        const token = req.query.token;
+        //const token = req.query.token;
 
-        if ((userId || token) == null) {
+        if (userId == null) {
 
             return baseModels.logError(errorResponse, response, 400, "Missing parameters", res);
         }
 
-        const plan = await PlanModel.findOne({ where: { user_id: userId } });
+        verifyToken(req, res, async () => {
+            const plan = await PlanModel.findOne({ where: { user_id: userId } });
 
-        if (plan != null) {
+            if (plan != null) {
 
-            response.success = true;
-            response.data = new Serializer(PlanModel, JSONScheme).serialize(plan);
-            return res.status(200).json(response)
+                response.success = true;
+                response.data = new Serializer(PlanModel, JSONScheme).serialize(plan);
+                return res.status(200).json(response)
 
 
-        } else {
+            } else {
 
-            return baseModels.logError(errorResponse, response, 404, "Plan was not found", res);
-        }
+                return baseModels.logError(errorResponse, response, 404, "Plan was not found", res);
+            }
+        });
 
 
 
