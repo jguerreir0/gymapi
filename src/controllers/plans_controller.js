@@ -7,7 +7,7 @@ const verifyToken = require('../controllers/token_controller')
 
 const JSONScheme = {
     include: ['@all'],
-    exclude: ['user_id'],
+    exclude: ['user_id', 'createdAt', 'updatedAt',],
 };
 
 module.exports = {
@@ -16,11 +16,10 @@ module.exports = {
         const response = { ...baseModels.baseResponseModel }
         const errorResponse = { ...baseModels.baseErrorResponseModel };
         const userId = req.query.user_id;
-        //const token = req.query.token;
 
         if (userId == null) {
 
-            return baseModels.logError(errorResponse, response, 400, "Missing parameters", res);
+            return baseModels.logError(errorResponse, response, 400, "A user ID is required for getting the plan", res);
         }
 
         verifyToken(req, res, errorResponse, response, async () => {
