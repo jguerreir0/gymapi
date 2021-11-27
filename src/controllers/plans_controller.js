@@ -29,7 +29,7 @@ module.exports = {
 
 
             } else {
-                return logError(errorResponse, response, 404, "Plan was not found", res);
+                return baseModels.logError(errorResponse, response, 404, "Plan was not found", res);
             }
         });
 

@@ -21,7 +21,7 @@ module.exports = {
 
         if (foundUser != null) {
 
-            return logError(errorResponse, response, 409, "User already exists", res);
+            return baseModels.logError(errorResponse, response, 409, "User already exists", res);
 
         } else {
             bcrypt.hash(password, 10, (err, encryptedPassword) => {
@@ -35,7 +35,7 @@ module.exports = {
                         return res.status(201).json(response)
                     }).catch(
                         err => {
-                            return logError(errorResponse, response, 500, err, res);
+                            return baseModels.logError(errorResponse, response, 500, err, res);
                         }
                     );
                 }
@@ -54,7 +54,7 @@ module.exports = {
             bcrypt.compare(password, foundUser.password, (error, matchPassword) => {
 
                 if (error) {
-                    return logError(errorResponse, response, 401, "Authentication failure, please re-enter your credentials or contact customer support", res);
+                    return baseModels.logError(errorResponse, response, 401, "Authentication failure, please re-enter your credentials or contact customer support", res);
                 }
 
                 if (matchPassword) {
@@ -68,14 +68,14 @@ module.exports = {
                 }
 
 
-                return logError(errorResponse, response, 401, "Authentication failure, please re-enter your credentials or contact customer support", res);
+                return baseModels.logError(errorResponse, response, 401, "Authentication failure, please re-enter your credentials or contact customer support", res);
 
 
             });
 
 
         } else {
-            return logError(errorResponse, response, 401, "Authentication failure, please re-enter your credentials or contact customer support", res);
+            return baseModels.logError(errorResponse, response, 401, "Authentication failure, please re-enter your credentials or contact customer support", res);
         }
     }
 }
